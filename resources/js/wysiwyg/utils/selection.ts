@@ -111,38 +111,28 @@ export function $insertNewBlockNodesAtSelection(nodes: LexicalNode[], insertAfte
 
 export function $insertNewNodesAtSelection(nodes: LexicalNode[]) {
     const selection = $getSelection();
-    const selectionPoints = selection?.getStartEndPoints();
-    let target: LexicalNode|null = null;
-    let targetBlock: LexicalNode|null = null;
-    if (selectionPoints) {
-        const selectionEnd = selectionPoints[1];
-        target = selectionEnd.getNode();
-        targetBlock = target ? $getNearestNodeBlockParent(target) : null;
+    if (selection) {
+        selection.insertNodes(nodes);
+        return;
     }
 
+    // Do something relatively sensible if we don't have a selection within view
+    const root = $getRoot();
+    let targetBlock = root.getLastChild();
     for (const node of nodes) {
         const isBlock = $isBlockElementNode(node);
-
         if (isBlock && !targetBlock) {
-            // Append to the root if its a block and we can't determine position
-            $getRoot().append(node);
-        } else if (isBlock && targetBlock) {
-            // Insert after the target block if we have a block
-            targetBlock.insertAfter(node);
-        } else if (!isBlock && selection) {
-            // Insert at selection if likely inline
-            selection.insertNodes(nodes);
-        } else if (!isBlock && $isElementNode(targetBlock)) {
-            // Append inside the target block if inline but we don't have
-            // a selection (typically used by the case below)
+            root.append(node);
+            targetBlock = node;
+        } else if (isBlock) {
+            targetBlock?.insertAfter(node);
+            targetBlock = node;
+        } else if ($isElementNode(targetBlock)) {
             targetBlock.append(node);
         } else {
-            // Otherwise (where inline) create a new root level paragraph
-            // and insert content into that. Update the target block
-            // for re-use by other inline elements.
             const paragraph = $createParagraphNode();
             paragraph.append(node);
-            $getRoot().append(paragraph);
+            root.append(paragraph);
             targetBlock = paragraph;
         }
     }
