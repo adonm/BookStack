@@ -837,22 +837,31 @@ function formatHtml(s: string): string {
   return s.replace(/>\s+</g, '><').replace(/\s*\n\s*/g, ' ').trim();
 }
 
-export function dispatchKeydownEventForNode(node: LexicalNode, editor: LexicalEditor, key: string) {
+interface TestKeyboardEventOptions {
+  ctrlKey?: boolean;
+  altKey?: boolean;
+  shiftKey?: boolean;
+  metaKey?: boolean;
+  keyCode?: number;
+}
+
+export function dispatchKeydownEventForNode(node: LexicalNode, editor: LexicalEditor, key: string, options: TestKeyboardEventOptions = {}) {
   const nodeDomEl = editor.getElementByKey(node.getKey());
   const event = new KeyboardEvent('keydown', {
     bubbles: true,
     cancelable: true,
     key,
+    ...options,
   });
   nodeDomEl?.dispatchEvent(event);
   editor.commitUpdates();
 }
 
-export function dispatchKeydownEventForSelectedNode(editor: LexicalEditor, key: string) {
+export function dispatchKeydownEventForSelectedNode(editor: LexicalEditor, key: string, options: TestKeyboardEventOptions = {}) {
   editor.getEditorState().read((): void => {
     const node = $getSelection()?.getNodes()[0] || null;
     if (node) {
-      dispatchKeydownEventForNode(node, editor, key);
+      dispatchKeydownEventForNode(node, editor, key, options);
     }
   });
 }
