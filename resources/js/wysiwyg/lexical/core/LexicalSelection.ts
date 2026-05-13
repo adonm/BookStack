@@ -2219,6 +2219,13 @@ export function $createRangeSelection(): RangeSelection {
   return new RangeSelection(anchor, focus, 0, '');
 }
 
+export function $createCollapsedRangeSelectionForNode(node: LexicalNode, offset: number = 0): RangeSelection {
+  const type = $isTextNode(node) ? 'text' : 'element';
+  const anchor = $createPoint(node.getKey(), offset, type);
+  const focus = $createPoint(node.getKey(), offset, type);
+  return new RangeSelection(anchor, focus, 0, '');
+}
+
 export function $createNodeSelection(): NodeSelection {
   return new NodeSelection(new Set());
 }

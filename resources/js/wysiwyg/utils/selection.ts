@@ -1,6 +1,6 @@
 import {
     $createNodeSelection,
-    $createParagraphNode, $createRangeSelection,
+    $createParagraphNode, $createRangeSelection, $getEditor, $getNearestNodeFromDOMNode,
     $getRoot,
     $getSelection, $isBlockElementNode, $isDecoratorNode,
     $isElementNode, $isParagraphNode,
@@ -8,7 +8,7 @@ import {
     $setSelection,
     BaseSelection, DecoratorNode,
     ElementNode, LexicalEditor,
-    LexicalNode,
+    LexicalNode, RangeSelection,
     TextFormatType, TextNode
 } from "lexical";
 import {$getNearestBlockElementAncestorOrThrow} from "@lexical/utils";
@@ -18,6 +18,7 @@ import {$setBlocksType} from "@lexical/selection";
 import {$getNearestNodeBlockParent, $getParentOfType, nodeHasAlignment} from "./nodes";
 import {CommonBlockAlignment} from "lexical/nodes/common";
 import {$isListItemNode} from "@lexical/list";
+import {$createCollapsedRangeSelectionForNode} from "lexical/LexicalSelection";
 
 const lastSelectionByEditor = new WeakMap<LexicalEditor, BaseSelection|null>;
 
@@ -300,4 +301,39 @@ export function $getDecoratorNodesInSelection(selection: BaseSelection | null): 
     }
 
     return selection.getNodes().filter(node => $isDecoratorNode(node));
+}
+
+/**
+ * Attempt to select the given node at roughly the pixel offset, relative to the left of the node.
+ * Returns the range selection if a selection could be made.
+ * Returns null if no selection can be made.
+ */
+export function $selectNodeAtXPixelOffset(node: LexicalNode, pixelOffset: number, targetStart: boolean = true): RangeSelection|null {
+    const targetDOM = $getEditor().getElementByKey(node.getKey());
+    if (!targetDOM) {
+        return null;
+    }
+
+    const targetChild = targetDOM.children[targetStart ? 0 : targetDOM.children.length - 1] || targetDOM;
+    const targetBounds = targetChild.getBoundingClientRect();
+    const targetY = targetBounds[targetStart ? 'top' : 'bottom'] + (targetStart ? 1 : -1);
+    const targetX = targetBounds.x + pixelOffset;
+    // Temporary caretRangeFromPoint usage due to caretPositionFromPoint being only
+    // very recently supported in Safari
+    // To remove post 2026
+    const caretRange = document.caretRangeFromPoint?.(targetX, targetY);
+    const caret = document.caretPositionFromPoint?.(targetX, targetY)
+        ?? (caretRange ? { offsetNode: caretRange.startContainer, offset: caretRange.startOffset } : undefined);
+    if (!caret) {
+        return null;
+    }
+
+    const targetNode = $getNearestNodeFromDOMNode(caret.offsetNode);
+    if (!targetNode) {
+        return null;
+    }
+
+    const rangeSelection = $createCollapsedRangeSelectionForNode(targetNode, caret.offset);
+    $setSelection(rangeSelection);
+    return rangeSelection;
 }
