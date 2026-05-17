@@ -71,21 +71,35 @@
                 </div>
             </div>
 
-            @if(user()->hasSystemRole('admin'))
-                <div class="mt-xl">
-                    <hr class="my-m">
-                    <div class="grid half gap-xl v-center">
-                        <div>
-                            <strong class="text-neg">{{ trans('settings.users_mfa_reset') }}</strong>
-                            <p class="text-small text-muted">{{ trans('settings.users_mfa_reset_desc', ['userName' => $user->name]) }}</p>
-                        </div>
-                        <div class="text-m-right">
-                            <form action="{{ url("/settings/users/{$user->id}/reset-mfa") }}" method="POST" style="display: inline;">
-                                @csrf
-                                <button type="submit" class="button neg" 
-                                        onclick="return confirm('{{ trans('settings.users_mfa_reset_confirm', ['userName' => $user->name]) }}')">
-                                    {{ trans('settings.users_mfa_reset') }}
-                                </button>
+            @if($mfaMethods->count() > 0)
+                <div id="reset-mfa" component="collapsible" class="form-group collapsible mt-s">
+                    <button refs="collapsible@trigger" type="button" class="collapse-title text-link" aria-expanded="false">
+                        <label for="mfa-reset">{{ trans('settings.users_mfa_reset') }}</label>
+                    </button>
+                    <div refs="collapsible@content" class="collapse-content">
+                        <div class="flex-container-row justify-space-between gap-m wrap items-center">
+                            <p class="text-small text-muted mb-none flex-2 min-width-m">{{ trans('settings.users_mfa_reset_desc') }}</p>
+                            <form action="{{ url("/settings/users/{$user->id}/mfa") }}" method="POST" style="display: inline;">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+                                <div class="dropdown-container" component="dropdown" option:dropdown:bubble-escapes="true">
+                                    <button class="button" refs="dropdown@toggle"
+                                            type="button"
+                                            aria-haspopup="listbox"
+                                            aria-expanded="{{ trans('settings.users_mfa_reset') }}">
+                                        {{ trans('common.reset') }}
+                                    </button>
+                                    <div refs="dropdown@menu" class="dropdown-menu" role="menu" aria-label="{{ trans('settings.users_mfa_reset') }}">
+                                        <p class="text-neg small px-m mb-xs">
+                                            {{ trans('settings.users_mfa_reset_confirm') }}
+                                        </p>
+                                        <div class="text-link small delete text-item">
+                                            <button type="submit" class="text-button neg">
+                                                {{ trans('common.reset') }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>

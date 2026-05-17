@@ -4,6 +4,7 @@ namespace BookStack\Users\Controllers;
 
 use BookStack\Access\SocialDriverManager;
 use BookStack\Access\UserInviteException;
+use BookStack\Activity\ActivityType;
 use BookStack\Exceptions\ImageUploadException;
 use BookStack\Exceptions\UserUpdateException;
 use BookStack\Http\Controller;
@@ -214,11 +215,14 @@ class UserController extends Controller
      */
     public function resetMfa(Request $request, int $id)
     {
+        $this->preventAccessInDemoMode();
         $this->checkPermission(Permission::UsersManage);
+
         $user = $this->userRepo->getById($id);
-        // Resetear el 2FA del usuario 
         $user->mfaValues()->delete();
-        session()->flash('success', trans('settings.users_mfa_reset_success', ['userName' => $user->name]));
-        return redirect()->back();
+
+        $this->logActivity(ActivityType::USER_MFA_RESET, $user);
+
+        return redirect("/settings/users/{$user->id}");
     }
 }
