@@ -78,7 +78,8 @@ return [
     'css_sources' => env('ALLOWED_CSS_SOURCES', null),
 
     // A list of sources/hostnames that can be loaded as image content within BookStack.
-    // Space separated if multiple. BookStack host domain is auto-inferred.
+    // Space separated if multiple. BookStack host domain is auto-inferred, in addition to
+    // data and blob images, due to their use for various functionality.
     // If not set, a permissive default set is used to reduce potential breakage.
     'image_sources' => env('ALLOWED_IMAGE_SOURCES', null),
 

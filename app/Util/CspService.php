@@ -175,6 +175,14 @@ class CspService
             $sources = array_filter(explode(' ', $configured));
             array_unshift($sources, "'self'");
 
+            // Ensure 'unsafe-inline' is quoted if present
+            // This is done as attempting to pass this in env values with quotes can either
+            // be awkward or cause issues.
+            $unsafeInlineIndex = array_search('unsafe-inline', $sources, true);
+            if ($unsafeInlineIndex !== false) {
+                $sources[$unsafeInlineIndex] = "'unsafe-inline'";
+            }
+
             return array_values(array_unique($sources));
         }
 
@@ -195,7 +203,7 @@ class CspService
 
         if (is_string($configured)) {
             $sources = array_filter(explode(' ', $configured));
-            array_unshift($sources, "'self'");
+            array_unshift($sources, "'self'", 'blob:', 'data:');
 
             return array_values(array_unique($sources));
         }
