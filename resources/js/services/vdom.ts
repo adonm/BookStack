@@ -24,3 +24,7 @@ export function patchDomFromHtmlString(domTarget: Element, html: string): void {
     contentDom.innerHTML = html;
     getPatcher()(toVNode(domTarget), toVNode(contentDom));
 }
+
+export function patchDomFromDom(domTarget: Element, domSource: Element): void {
+    getPatcher()(toVNode(domTarget), toVNode(domSource));
+}
