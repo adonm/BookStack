@@ -153,7 +153,7 @@ class SecurityHeaderTest extends TestCase
 
     public function test_style_src_csp_header_set_to_permissive_defaults_when_not_configured()
     {
-        config()->set('app.css_sources', null);
+        config()->set('app.style_sources', null);
         $resp = $this->get('/');
         $header = $this->getCspHeader($resp, 'style-src');
 
@@ -162,7 +162,7 @@ class SecurityHeaderTest extends TestCase
 
     public function test_style_src_csp_header_can_be_overridden_by_config()
     {
-        config()->set('app.css_sources', 'https://fonts.example.com');
+        config()->set('app.style_sources', 'https://fonts.example.com');
 
         $resp = $this->get('/');
         $header = $this->getCspHeader($resp, 'style-src');
@@ -172,7 +172,7 @@ class SecurityHeaderTest extends TestCase
 
     public function test_style_src_csp_header_unsafe_inline_value_will_be_auto_quoted()
     {
-        config()->set('app.css_sources', 'unsafe-inline https://css.example.com');
+        config()->set('app.style_sources', 'unsafe-inline https://css.example.com');
 
         $resp = $this->get('/');
         $header = $this->getCspHeader($resp, 'style-src');
@@ -182,7 +182,7 @@ class SecurityHeaderTest extends TestCase
 
     public function test_style_src_can_be_blank_to_set_no_additions()
     {
-        config()->set('app.css_sources', '');
+        config()->set('app.style_sources', '');
 
         $resp = $this->get('/');
         $header = $this->getCspHeader($resp, 'style-src');

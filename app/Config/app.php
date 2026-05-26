@@ -72,10 +72,10 @@ return [
     // Current host and source for the "DRAWIO" setting will be auto-appended to the sources configured.
     'iframe_sources' => env('ALLOWED_IFRAME_SOURCES', 'https://*.draw.io https://*.youtube.com https://*.youtube-nocookie.com https://*.vimeo.com'),
 
-    // A list of sources/hostnames that can be loaded as CSS styles within BookStack.
+    // A list of style sources/hostnames that can be loaded styles within BookStack.
     // Space separated if multiple. BookStack host domain is auto-inferred.
     // If not set, a permissive default set is used to reduce potential breakage.
-    'css_sources' => env('ALLOWED_CSS_SOURCES', null),
+    'style_sources' => env('ALLOWED_STYLE_SOURCES', null),
 
     // A list of sources/hostnames that can be loaded as image content within BookStack.
     // Space separated if multiple. BookStack host domain is auto-inferred, in addition to

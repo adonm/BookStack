@@ -169,7 +169,7 @@ class CspService
      */
     protected function getAllowedStyleSources(): array
     {
-        $configured = config('app.css_sources');
+        $configured = config('app.style_sources');
 
         if (is_string($configured)) {
             $sources = array_filter(explode(' ', $configured));
