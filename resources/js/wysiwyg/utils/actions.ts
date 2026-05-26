@@ -109,7 +109,7 @@ export function focusOnHeader(editor: LexicalEditor, headerIndex: number): void 
         const headers = $getAllNodesOfType($isHeadingNode);
         const target = headers[headerIndex];
         if (target) {
-            target.selectStart();
+            target.selectEnd();
         }
     });
 }

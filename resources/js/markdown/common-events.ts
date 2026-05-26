@@ -1,5 +1,4 @@
 import {MarkdownEditor} from "./index.mjs";
-import {focusOnHeader} from "../wysiwyg/utils/actions";
 
 export interface HtmlOrMarkdown {
     html: string;

@@ -195,7 +195,7 @@ export class Actions {
      * Focus on the text for a specific header in the content.
      */
     focusOnHeader(index: number): void {
-        const headerPattern = /^\s{0,3}(#+|<h)/i;
+        const headerPattern = /^\s{0,3}(#+|<h[1-6][\s>])/i;
         const codeBoundary = /^\s{0,3}```/i;
         let currentIndex = -1;
         let inCodeBoundary = false;
