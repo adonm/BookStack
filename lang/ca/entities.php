@@ -331,6 +331,9 @@ return [
 
     // Editor Sidebar
     'toggle_sidebar' => 'Commuta la barra lateral',
+    'page_contents' => 'Page Contents',
+    'page_contents_none' => 'No headings were found in the page content.',
+    'page_contents_info' => 'The contents menu is generated from any heading formats used in the page.',
     'page_tags' => 'Etiquetes de la pàgina',
     'chapter_tags' => 'Etiquetes del capítol',
     'book_tags' => 'Etiquetes del llibre',

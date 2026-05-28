@@ -331,6 +331,9 @@ return [
 
     // Editor Sidebar
     'toggle_sidebar' => 'Toggle Sidebar',
+    'page_contents' => 'Page Contents',
+    'page_contents_none' => 'No headings were found in the page content.',
+    'page_contents_info' => 'The contents menu is generated from any heading formats used in the page.',
     'page_tags' => 'Ετικέτες Σελίδας',
     'chapter_tags' => 'Ετικέτες Κεφαλαίου',
     'book_tags' => 'Ετικέτες Βιβλίου',

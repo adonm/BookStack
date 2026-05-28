@@ -265,6 +265,9 @@ Hinweis: Benutzer können ihre E-Mail Adresse nach erfolgreicher Registrierung �
     'users_mfa_desc' => 'Richte Multi-Faktor-Authentifizierung als zusätzliche Sicherheitsstufe für dein Benutzerkonto ein.',
     'users_mfa_x_methods' => ':count Methode konfiguriert|:count Methoden konfiguriert',
     'users_mfa_configure' => 'Methoden konfigurieren',
+    'users_mfa_reset' => 'Setze Multifaktor-Authentifizierung zurück',
+    'users_mfa_reset_desc' => 'Dies wird alle konfigurierten Multifaktor-Authentifizierungsmethoden für diesen Nutzer zurücksetzen. Falls Multifaktor-Authentifizierung für eine seiner Rollen erforderlich ist, werden sie aufgefordert, neue Methoden beim nächsten Login zu konfigurieren.',
+    'users_mfa_reset_confirm' => 'Sind Sie sicher, dass Sie diese Multi-Faktor-Authentifizierungsmethode für diesen Nutzer zurücksetzen möchten?',
 
     // API Tokens
     'user_api_token_create' => 'Neuen API-Token erstellen',
@@ -365,6 +368,7 @@ Hinweis: Benutzer können ihre E-Mail Adresse nach erfolgreicher Registrierung �
         'sk' => 'Slowenisch',
         'sl' => 'Slowenisch',
         'sv' => 'Schwedisch',
+        'th' => 'ภาษาไทย',
         'tr' => 'Türkisch',
         'uk' => 'Ukrainisch',
         'uz' => 'O‘zbekcha',

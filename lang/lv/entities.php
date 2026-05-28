@@ -331,6 +331,9 @@ return [
 
     // Editor Sidebar
     'toggle_sidebar' => 'Pārslēgt sānjoslu',
+    'page_contents' => 'Page Contents',
+    'page_contents_none' => 'No headings were found in the page content.',
+    'page_contents_info' => 'The contents menu is generated from any heading formats used in the page.',
     'page_tags' => 'Lapas birkas',
     'chapter_tags' => 'Nodaļas birkas',
     'book_tags' => 'Grāmatas birkas',

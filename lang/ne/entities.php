@@ -331,6 +331,9 @@ return [
 
     // Editor Sidebar
     'toggle_sidebar' => 'साइडबार टगल गर्नुहोस्',
+    'page_contents' => 'Page Contents',
+    'page_contents_none' => 'No headings were found in the page content.',
+    'page_contents_info' => 'The contents menu is generated from any heading formats used in the page.',
     'page_tags' => 'पाना ट्यागहरू',
     'chapter_tags' => 'अध्याय ट्यागहरू',
     'book_tags' => 'पुस्तक ट्यागहरू',

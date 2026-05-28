@@ -331,6 +331,9 @@ return [
 
     // Editor Sidebar
     'toggle_sidebar' => 'แสดง/ซ่อนแถบด้านข้าง',
+    'page_contents' => 'Page Contents',
+    'page_contents_none' => 'No headings were found in the page content.',
+    'page_contents_info' => 'The contents menu is generated from any heading formats used in the page.',
     'page_tags' => 'แท็กหน้า',
     'chapter_tags' => 'แท็กบท',
     'book_tags' => 'แท็กหนังสือ',

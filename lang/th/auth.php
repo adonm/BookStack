@@ -8,6 +8,7 @@ return [
 
     'failed' => 'ข้อมูลประจำตัวไม่ตรงกับที่มีในระบบ',
     'throttle' => 'เข้าสู่ระบบล้มเหลวหลายครั้งเกินไป กรุณาลองใหม่ในอีก :seconds วินาที',
+    'mfa_throttle' => 'Too many multi-factor verification attempts. Please try again in :seconds seconds.',
 
     // Login & Register
     'sign_up' => 'สมัครสมาชิก',

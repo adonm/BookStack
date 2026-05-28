@@ -8,6 +8,7 @@ return [
 
     'failed' => 'As credenciais fornecidas não puderam ser validadas em nossos registros.',
     'throttle' => 'Muitas tentativas de login. Por favor, tente novamente em :seconds segundos.',
+    'mfa_throttle' => 'Too many multi-factor verification attempts. Please try again in :seconds seconds.',
 
     // Login & Register
     'sign_up' => 'Criar Conta',

@@ -264,6 +264,9 @@ return [
     'users_mfa_desc' => '设置多重身份认证能增加您账户的安全性。',
     'users_mfa_x_methods' => ':count 个措施已配置|:count 个措施已配置',
     'users_mfa_configure' => '配置安全措施',
+    'users_mfa_reset' => '重置多重身份验证方法',
+    'users_mfa_reset_desc' => '此操作将重置并清除该用户所有已配置的多重身份验证方法。如果多重身份验证是任何角色所要求的，用户在下次登录时将被提示配置新的方法。',
+    'users_mfa_reset_confirm' => '您确定要重置此用户的多重身份验证吗？',
 
     // API Tokens
     'user_api_token_create' => '创建 API 令牌',
@@ -364,6 +367,7 @@ return [
         'sk' => 'Slovensky',
         'sl' => 'Slovenščina',
         'sv' => 'Svenska',
+        'th' => 'ภาษาไทย',
         'tr' => 'Türkçe',
         'uk' => 'Українська',
         'uz' => 'O‘zbekcha',
