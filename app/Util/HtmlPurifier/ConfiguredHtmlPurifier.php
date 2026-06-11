@@ -38,7 +38,6 @@ class ConfiguredHtmlPurifier
             $this->configureHtmlDefinition($htmlDef);
         }
 
-        /** @var \HTMLPurifier_URIDefinition $uriDef */
         $uriDef = $config->getDefinition('URI', true, true);
         if ($uriDef instanceof HTMLPurifier_URIDefinition) {
             $this->configureUriDefinition($uriDef);
