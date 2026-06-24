@@ -23,13 +23,11 @@ jobs:
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       with:
-        command: monitor
-        args: --file=composer.lock --project-name=bookstack-${{forgejo.ref_name}}-composer
+        args: snyk monitor --file=composer.lock --project-name=bookstack-${{forgejo.ref_name}}-composer
 
     - name: Update Snyk for monitoring - NPM
       uses: https://github.com/snyk/actions/node@master
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       with:
-        command: monitor
-        args: --file=package-lock.json --project-name=bookstack-${{forgejo.ref_name}}-npm
+        args: snyk monitor --file=package-lock.json --project-name=bookstack-${{forgejo.ref_name}}-npm
